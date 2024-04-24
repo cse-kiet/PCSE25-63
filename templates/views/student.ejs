@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Module</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/css/student.css">
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <div class="top">
+            <div class="logo">
+                <i class="bx bxl-codepen"></i>
+                <span>Student Dashboard</span>
+            </div>
+            <i class="bx bx-menu" id="btn"></i>
+        </div>
+        <div class="user">
+    <% if (user && user.profilePicture) { %>
+        <img src="<%= user.profilePicture %>" alt="Profile Picture" class="user-img">
+    <% } else { %>
+        <img src="https://img.freepik.com/premium-photo/indian-college-student-portrait-with-phone-studio-backpack-university-education-connection-blue-background-happy-man-person-excited-study-learn-future-goals_590464-212509.jpg?w=2000" alt="Profile Picture" class="user-img">
+    <% } %>
+    <div>
+        <% if (user && user.name) { %>
+            <p><%= user.name %></p>
+        <% } else { %>
+            <p>Default Username</p>
+        <% } %>
+    </div>
+</div>
+        <ul>
+            <li>
+                <a href="./updateProfile">
+                    <i class="bx bxs-grid-alt"></i>
+                    <span class="nav-item">UpdateProfile</span>
+                </a>
+                <span class="tooltip">UpdateProfile</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-data'></i>
+                    <span class="nav-item">UploadDocs</span>
+                </a>
+                <span class="tooltip">UploadDocs</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-detail'></i>
+                    <span class="nav-item">Skills</span>
+                </a>
+                <span class="tooltip">Skills</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-id-card'></i>
+                    <span class="nav-item">AppliedStatus</span>
+                </a>
+                <span class="tooltip">AppliedStatus</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="bx bx-cog"></i>
+                    <span class="nav-item">Setting</span>
+                </a>
+                <span class="tooltip">Setting</span>
+            </li>
+            <li>
+                <a href="./logout">
+                    <i class="bx bx-log-out"></i>
+                    <span class="nav-item">Logout</span>
+                </a>
+                <span class="tooltip">Logout</span>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="job-updates">
+        <h1>New Job Updates</h1>
+        <% if (jobPostings.length> 0) { %>
+            <ul>
+                <% jobPostings.forEach(jobPosting=> { %>
+                    <li>
+                        <h3>
+                            <%= jobPosting.companyName %>
+                        </h3>
+                        <p>Profile: <%= jobPosting.profile %>
+                        </p>
+                        <p>Skills Required: <%= jobPosting.skillsRequired.join(', ') %></p>
+                            <p>Eligibility: <%= jobPosting.eligibility %></p>
+                            <p>Description: <%= jobPosting.description %></p>
+                            <p>Apply Link: <a href="<%= jobPosting.applyLink %>"><%= jobPosting.applyLink %></a></p>
+                        </li>
+                    <% }) %>
+                </ul>
+            <% } else { %>
+                <p>No job postings available</p>
+            <% } %>
+        </div>
+
+    <script>
+        let btn = document.querySelector("#btn");
+        let sidebar = document.querySelector(".sidebar");
+
+        btn.onclick = function () {
+            sidebar.classList.toggle("active");
+        };
+    </script>
+</body>
+
+</html>
