@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Module</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        table {
+            font-family: Arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <h1>Add Education</h1>
+        <form action="/updateEducation" method="POST">
+            <label for="tenthPercentage">10th Percentage:</label>
+            <input type="number" id="tenthPercentage" name="tenthPercentage" min="0" max="100" step="0.01"
+                required><br><br>
+
+            <label for="twelfthPercentage">12th Percentage:</label>
+            <input type="number" id="twelfthPercentage" name="twelfthPercentage" min="0" max="100" step="0.01"
+                required><br><br>
+
+            <label for="btechPercentage">B.Tech Percentage:</label>
+            <input type="number" id="btechPercentage" name="btechPercentage" min="0" max="100" step="0.01"
+                required><br><br>
+
+            <button type="submit">Submit</button>
+        </form>
+        <div>
+
+            <h1>Your Education Details</h1>
+            <table>
+                <tr>
+                    <th>Education Level</th>
+                    <th>Percentage</th>
+                </tr>
+                <% education.forEach(edu=> { %>
+                    <tr>
+                        <td>
+                            <%= edu.type %>
+                        </td>
+                        <td>
+                            <%= edu.percentage %>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </table>
+</body>
+
+</html>

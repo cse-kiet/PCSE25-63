@@ -1,0 +1,30 @@
+<!-- skill.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Skills</title>
+</head>
+
+<body>
+    <h1>Add Skills</h1>
+    <!-- Form to add new skill -->
+    <form action="/addSkills" method="post">
+        <label for="skill">Skill:</label>
+        <input type="text" id="skill" name="skill" required>
+        <button type="submit">Add Skill</button>
+    </form>
+
+    <h2>Skills List:</h2>
+    <ul>
+        <!-- Loop through the skills array passed from the server -->
+        <% skills.forEach(skill => { %>
+            <li><%= skill %></li>
+        <% }); %>
+    </ul>
+</body>
+
+</html>

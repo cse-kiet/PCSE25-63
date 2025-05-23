@@ -1,0 +1,204 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department</title>
+    <link rel="stylesheet" href="/css/departement.css">
+    <style>
+        .student-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        .student-table th, .student-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .student-table th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
+        .student-table tr:hover {
+            background-color: #f9f9f9;
+        }
+        .table-container {
+            padding: 20px;
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+        /* Add styles for active navigation items */
+        .nav-active {
+            background-color: grey;
+            border-radius: 4px;
+        }
+        /* Hide rows when filtered */
+        .hidden {
+            display: none;
+        }
+
+         /* Add styles for the year display in navbar */
+        .year-display {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .selected-year {
+            background: #f0f0f0;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <div class="right">
+                    <img src="images/logo2.png" alt="">
+                </div>
+                <div class="left">
+                    <li><a href="#" id="showAll" class="nav-active">Home</a></li>
+                    <li><a href="#" id="showPlaced">Students Placed</a></li>
+                    <li><a href="#" id="showPending">Pending</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropbtn year-display">
+                            Year <span class="selected-year">(<%= selectedYear %>)</span>
+                        </a>
+                        <div class="dropdown-content">
+                            <% for(let y = new Date().getFullYear(); y >= 2014; y--) { %>
+                                <a href="/department?year=<%= y %>" <%= selectedYear == y ? 'class="active"' : '' %>><%= y %></a>
+                            <% } %>
+                        </div>
+                    </li>
+                    <li><a href="./logout">LogOut</a></li>
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main-content">
+        <div class="container">
+            <h1 style="text-align: center;"><%= faculty.department %> Department</h1>
+            <h2 id="selectedYear">Selected Year: <%= selectedYear %></h2>
+        </div>
+        <div class="container-detail">
+            <div class="box" id="acceptedBox">
+                <h3 id="status">Total Student: <span id="totalCount"><%= statistics.totalStudents %></span></h3>
+            </div>
+            <div class="box" id="appliedBox">
+                <h3 id="status">Total Placed: <span id="placedCount"><%= statistics.placedStudents %></span></h3>
+            </div>
+            <div class="box" id="rejectedBox">
+                <h3 id="status">Pending: <span id="pendingCount"><%= statistics.pendingStudents %></span></h3>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table class="student-table">
+                <thead>
+                    <tr>
+                        <th>Roll Number</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Placement Status</th>
+                        <th>Passout Year</th>
+                    </tr>
+                </thead>
+                <tbody id="studentTableBody">
+                    <% if (students && students.length > 0) { %>
+                        <% students.forEach(student => { %>
+                            <tr class="student-row" data-placed="<%= student.isPlaced %>">
+                                <td><%= student.rollNo %></td>
+                                <td><%= student.name %></td>
+                                <td><%= student.email %></td>
+                                <td><%= student.isPlaced ? 'Placed' : 'Not Placed' %></td>
+                                <td><%= student.passoutYear %></td>
+                            </tr>
+                        <% }) %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="6" style="text-align: center;">No students found for this year</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Function to update active navigation state
+        function updateNavActive(activeId) {
+            document.querySelectorAll('.left a').forEach(link => {
+                link.classList.remove('nav-active');
+            });
+            document.getElementById(activeId).classList.add('nav-active');
+        }
+
+        // Function to filter table rows
+        function filterStudents(filterType) {
+            const rows = document.querySelectorAll('.student-row');
+            rows.forEach(row => {
+                const isPlaced = row.getAttribute('data-placed') === 'true';
+                
+                if (filterType === 'all') {
+                    row.classList.remove('hidden');
+                } else if (filterType === 'placed' && isPlaced) {
+                    row.classList.remove('hidden');
+                } else if (filterType === 'pending' && !isPlaced) {
+                    row.classList.remove('hidden');
+                } else {
+                    row.classList.add('hidden');
+                }
+            });
+
+            // Update statistics based on visible rows
+            updateStatistics();
+        }
+
+        // Function to update statistics based on visible rows
+        function updateStatistics() {
+            const visibleRows = document.querySelectorAll('.student-row:not(.hidden)');
+            const placedRows = Array.from(visibleRows).filter(row => row.getAttribute('data-placed') === 'true');
+            
+            document.getElementById('totalCount').textContent = visibleRows.length;
+            document.getElementById('placedCount').textContent = placedRows.length;
+            document.getElementById('pendingCount').textContent = visibleRows.length - placedRows.length;
+        }
+
+        // Event Listeners
+        document.getElementById('showAll').addEventListener('click', (e) => {
+            e.preventDefault();
+            filterStudents('all');
+            updateNavActive('showAll');
+        });
+
+        document.getElementById('showPlaced').addEventListener('click', (e) => {
+            e.preventDefault();
+            filterStudents('placed');
+            updateNavActive('showPlaced');
+        });
+
+        document.getElementById('showPending').addEventListener('click', (e) => {
+            e.preventDefault();
+            filterStudents('pending');
+            updateNavActive('showPending');
+        });
+
+        // Year dropdown functionality
+        document.querySelectorAll('.dropdown-content a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const year = this.textContent;
+                document.getElementById('selectedYear').textContent = 'Selected Year: ' + year;
+                window.location.href = this.href;
+            });
+        });
+    </script>
+</body>
+</html>

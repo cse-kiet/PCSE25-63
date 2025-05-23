@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Module</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/student.css" />
+  </head>
+
+  <body>
+    <div class="sidebar">
+      <div class="top">
+        <div class="logo">
+          <i class="bx bxl-codepen"></i>
+          <span>Student Dashboard</span>
+        </div>
+        <i class="bx bx-menu" id="btn"></i>
+      </div>
+      <div class="user">
+        <% if (user && user.profilePicture) { %>
+        <img
+          src="<%= user.profilePicture %>"
+          alt="Profile Picture"
+          class="user-img"
+        />
+        <% } else { %>
+        <img
+          src="https://static.vecteezy.com/system/resources/previews/007/469/004/non_2x/graduated-student-in-simple-flat-personal-profile-icon-or-symbol-people-concept-illustration-vector.jpg"
+          alt="Profile Picture"
+          class="user-img"
+        />
+        <% } %>
+        <div>
+          <% if (user && user.name) { %>
+          <p><%= user.name %></p>
+          <% } else { %>
+          <p>Default Username</p>
+          <% } %>
+        </div>
+      </div>
+      <ul>
+        <li>
+          <a href="./updateProfile">
+            <i class="bx bxs-grid-alt"></i>
+            <span class="nav-item">UpdateProfile</span>
+          </a>
+          <span class="tooltip">UpdateProfile</span>
+        </li>
+        <li>
+          <a href="./AddEducation">
+            <i class="bx bx-data"></i>
+            <span class="nav-item">AddEducation</span>
+          </a>
+          <span class="tooltip">AddEducation</span>
+        </li>
+        <li>
+          <a href="./skills">
+            <i class="bx bx-detail"></i>
+            <span class="nav-item">Skills</span>
+          </a>
+          <span class="tooltip">Skills</span>
+        </li>
+        <li>
+          <a href="./appliedStatus">
+            <i class="bx bxs-id-card"></i>
+            <span class="nav-item">AppliedStatus</span>
+          </a>
+          <span class="tooltip">AppliedStatus</span>
+        </li>
+        <li>
+          <a href="/">
+            <i class="bx bx-home"></i>
+            <span class="nav-item">Home</span>
+          </a>
+          <span class="tooltip">Home</span>
+        </li>
+        <li>
+          <a href="./logout">
+            <i class="bx bx-log-out"></i>
+            <span class="nav-item">Logout</span>
+          </a>
+          <span class="tooltip">Logout</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="main-content">
+      <div class="top-content-home">
+        <h1 style="text-align: center">New Job Updates</h1>
+        <div class="top-right-buttons">
+          <div id="notification-toggle" class="notification-icon">
+            <i class="bx bx-bell"></i>
+            <span class="badge" id="notification-count"
+              ><%= notification.length %></span
+            >
+          </div>
+          <div id="notification-dropdown" class="notification-dropdown hidden">
+            <% notification.forEach(function(notify) { %>
+            <div class="notification-item">
+              <div><%= notify.title %></div>
+              <div><%= notify.company %></div>
+              <div><%= notify.description %></div>
+              <div><%= notify.expectedDate %></div>
+            </div>
+            <% }); %>
+          </div>
+          <button id="mode-toggle">
+            <i class="bx bx-moon"></i>
+            <span class="nav-item">Dark Mode</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Company Name</th>
+              <th>Profile</th>
+              <th>Skills Required</th>
+              <th>Eligibility</th>
+              <th>Description</th>
+              <th>Last Date to Apply</th>
+              <th>Timing for Apply</th>
+              <th>Apply</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% jobPostings.forEach(function(job) { %>
+            <tr>
+              <td><%= job.companyName %></td>
+              <td><%= job.profile %></td>
+              <td><%= job.skillsRequired.join(', ') %></td>
+              <td><%= job.eligibility %></td>
+              <td><%= job.description %></td>
+              <td><%= job.lastDate.toDateString() %></td>
+              <td><%= job.timing %></td>
+              <td>
+                <a href="<%= job.applyLink %>" target="_blank"
+                  ><button>Apply Now</button></a
+                >
+              </td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      let btn = document.querySelector("#btn");
+      let sidebar = document.querySelector(".sidebar");
+
+      btn.onclick = function () {
+        sidebar.classList.toggle("active");
+      };
+
+      // mode
+
+      let modeToggle = document.querySelector("#mode-toggle");
+      let body = document.body;
+
+      btn.onclick = function () {
+        sidebar.classList.toggle("active");
+      };
+
+      modeToggle.onclick = function () {
+        body.classList.toggle("dark-mode");
+        body.classList.toggle("light-mode");
+
+        if (body.classList.contains("dark-mode")) {
+          modeToggle.innerHTML =
+            "<i class='bx bx-sun'></i><span class='nav-item'>Light Mode</span>";
+        } else {
+          modeToggle.innerHTML =
+            "<i class='bx bx-moon'></i><span class='nav-item'>Dark Mode</span>";
+        }
+      };
+
+      // Set initial mode
+      body.classList.add("light-mode");
+
+      // notification functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const notificationToggle = document.getElementById(
+          "notification-toggle"
+        );
+        const notificationDropdown = document.getElementById(
+          "notification-dropdown"
+        );
+        const notificationCount = document.getElementById("notification-count");
+
+        notificationToggle.addEventListener("click", function (event) {
+            console.log("in notificationToggle");
+          event.stopPropagation(); // Prevent the click event from bubbling up
+          notificationDropdown.classList.toggle("hidden");
+        });
+
+        // Hide the dropdown if the user clicks outside of it
+        document.addEventListener("click", function (event) {
+          if (
+            !notificationToggle.contains(event.target) &&
+            !notificationDropdown.contains(event.target)
+          ) {
+            notificationDropdown.classList.add("hidden");
+          }
+        });
+
+        // Update notification count
+        const notifications =
+          notificationDropdown.querySelectorAll(".notification-item");
+        if (notifications.length > 0) {
+          notificationCount.textContent = notifications.length;
+        } else {
+          notificationCount.textContent = "0";
+        }
+      });
+    </script>
+  </body>
+</html>

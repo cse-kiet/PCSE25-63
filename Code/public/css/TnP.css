@@ -1,0 +1,18 @@
+/* CSS for notification popup */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 1000;
+    transition: opacity 0.5s ease;
+}
+
+.notification:hover {
+    opacity: 0.8;
+}

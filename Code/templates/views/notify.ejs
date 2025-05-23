@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notify Student</title>
+    <link rel="stylesheet" href="css/jobNotification.css">
+    <link rel="stylesheet" href="/css/nav.css" />
+  </head>
+  <body>
+    
+    <header>
+      <nav>
+        <ul>
+          <div class="right">
+            <img src="/images/logo2.png" alt="" />
+          </div>
+          <div class="left">
+            <li><a href="/">Home</a></li>
+            <!-- <li><a href="/">Notify Student</a></li> -->
+            <li><a href="./TnP">CRPC Page</a></li>
+            <li><a href="./logout">LogOut</a></li>
+          </div>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="container">
+      <h1>Post Job Notification</h1>
+      <form id="jobNotificationForm" action="/submit-notification" method="post">
+        <div class="form-group">
+          <label for="title">Job Title</label>
+          <input type="text" id="title" name="title" required>
+        </div>
+        <div class="form-group">
+          <label for="company">Company Name</label>
+          <input type="text" id="company" name="company" required>
+        </div>
+        <div class="form-group">
+          <label for="description">Job Description</label>
+          <textarea id="description" name="description" rows="5" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="expectedDate">Expected Date</label>
+          <input type="date" id="expectedDate" name="expectedDate" required>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    
+
+
+  </body>
+</html>
