@@ -1,15 +1,49 @@
-# Title of Project: [PROJECT_TITLE_HERE]
+# Title of Project:  Training And Placement Process Automation 
 
 ## Team Members:
-1. [TEAM_MEMBER_1_NAME]
-2. [TEAM_MEMBER_2_NAME]
-3. [TEAM_MEMBER_3_NAME]
-4. [TEAM_MEMBER_4_NAME]
+1. Abhishek Kumar Rai - 2100290100008
+2. Shhubham Verma - 2100290100163
+3. Parag Gupta - 2100290310101
 
 ## Steps for Execution:
-1. [STEP 1]
-2. [STEP 2]
-   (Add more steps as needed)
+
+1. *Requirement Gathering & Analysis*
+   - Conducted interviews with TPOs and students to understand the manual pain points.
+   - Documented functional and non-functional requirements for the automation system.
+
+2. *System Design*
+   - Created Entity Relationship Diagrams (ERD) for database structure.
+   - Designed system architecture using modular MVC principles.
+   - Wireframed the frontend layout and user journey for all stakeholders.
+
+3. *Tech Stack Finalization*
+   - Frontend: HTML/CSS + Bootstrap / React.js
+   - Backend: Node.js / Django
+   - Database: MySQL / PostgreSQL
+   - Containerization & Deployment: Docker
+
+4. *Development Phase*
+   - Developed separate modules for Admin, TPO, and Student roles.
+   - Implemented authentication system with role-based access control.
+   - Created features for student registration, resume upload, drive creation, shortlisting, and placement tracking.
+
+5. *Database Integration*
+   - Normalized database schema implemented using MySQL.
+   - Stored procedures and joins created to simplify complex queries.
+
+6. *Testing & Debugging*
+   - Unit tests for backend endpoints and input validations.
+   - Manual testing for user flows and form data.
+   - Resolved issues based on test feedback.
+
+7. *Deployment Setup*
+   - Created a Dockerfile for containerizing the web application.
+   - Verified the deployment process on a local and remote server environment.
+
+8. *Documentation & Reporting*
+   - Prepared Final Report, Synopsis, and Presentation.
+   - Generated .sql dump of the database.
+   - Created README file with usage, setup, and team information.
 
 ## Checklist:
 1. Final Project Report
