@@ -1,0 +1,35 @@
+[{
+  "_id": {
+    "$oid": "6818e69686c3b27446079416"
+  },
+  "rollNo": "STU001",
+  "email": "student@kiet.edu",
+  "password": "$2b$10$EBsrsQpM1aizAaGAoq./Eeo9M9zB5orM/K1zHul9.lRrQZs6yA8hO",
+  "userType": "student",
+  "name": "Abhi",
+  "skills": [
+    "MongoDB",
+    "Node.js"
+  ],
+  "education": [
+    {
+      "type": "10th",
+      "percentage": 85,
+      "_id": {
+        "$oid": "6818e69686c3b27446079417"
+      }
+    },
+    {
+      "type": "12th",
+      "percentage": 88,
+      "_id": {
+        "$oid": "6818e69686c3b27446079418"
+      }
+    }
+  ],
+  "department": "CSE",
+  "isPlaced": false,
+  "passoutYear": 2025,
+  "__v": 0,
+  "profilePicture": "https://res.cloudinary.com/dmwgure67/image/upload/v1746465547/jncxnbzjfzwigdsrtt2m.jpg"
+}]

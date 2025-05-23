@@ -1,0 +1,80 @@
+[{
+  "_id": {
+    "$oid": "6818f1f89a893c09642857e2"
+  },
+  "companyName": "Google",
+  "profile": "Software Engineer",
+  "skillsRequired": [
+    "JavaScript",
+    "Node.js",
+    "Cloud"
+  ],
+  "eligibility": "B.Tech in CSE/IT, CGPA > 7",
+  "description": "Work with cutting-edge tech at scale.",
+  "applyLink": "https://careers.google.com/jobs/results/123456-software-engineer",
+  "lastDate": {
+    "$date": "2025-05-22T00:00:00.000Z"
+  },
+  "timing": "11:00 AM",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6818f2b49a893c09642857ed"
+  },
+  "companyName": "Microsoft",
+  "profile": "Data Scientist",
+  "skillsRequired": [
+    "Python",
+    "ML",
+    "Azure"
+  ],
+  "eligibility": "B.Tech + Knowledge of Statistics",
+  "description": "Analyze data to drive insights.",
+  "applyLink": "https://careers.microsoft.com/jobs/987654-data-scientist",
+  "lastDate": {
+    "$date": "2025-05-30T00:00:00.000Z"
+  },
+  "timing": "9:00 AM",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6818f2eb9a893c09642857ef"
+  },
+  "companyName": "Tata Consultancy Services",
+  "profile": "System Analyst",
+  "skillsRequired": [
+    "SQL",
+    "Java",
+    "Communication"
+  ],
+  "eligibility": "B.Tech or MCA",
+  "description": "Client-oriented business solutions.",
+  "applyLink": "https://nextstep.tcs.com/jobs/456123",
+  "lastDate": {
+    "$date": "2025-05-31T00:00:00.000Z"
+  },
+  "timing": "9:00 AM",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6818f31b9a893c09642857f1"
+  },
+  "companyName": "Amazon",
+  "profile": "Cloud Support Associate",
+  "skillsRequired": [
+    "Linux",
+    "Networking",
+    "AWS"
+  ],
+  "eligibility": "Any UG/PG with relevant skills\"",
+  "description": "Support AWS customers globally.",
+  "applyLink": "https://www.amazon.jobs/en/jobs/321321-cloud-support",
+  "lastDate": {
+    "$date": "2025-05-22T00:00:00.000Z"
+  },
+  "timing": "9:00 AM",
+  "__v": 0
+}]
