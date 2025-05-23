@@ -2,7 +2,7 @@
 
 ## Team Members:
 1. Abhishek Kumar Rai - 2100290100008
-2. Shhubham Verma - 2100290100163
+2. Shubham Verma - 2100290100163
 3. Parag Gupta - 2100290310101
 
 ## Steps for Execution:
